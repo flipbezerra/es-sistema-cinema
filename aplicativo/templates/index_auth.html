@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load bootstrap4 %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Página inicial do Adminstrador/Usuário</title>
+    {% bootstrap_css %}
+</head>
+<body>
+    {% bootstrap_messages %}
+    <style>
+    .espaco-2cm {
+    margin-bottom: 2cm;
+    }
+    </style>
+    <p class="espaco-2cm"></p>
+    {% buttons %}
+    <a type="button" class="btn btn-primary btn-lg btn-block" href="filmes">Agendamento de Filmes</a>
+    <a type="button" class="btn btn-secondary btn-lg btn-block" href="registrar">Criação de novo Usuário</a>
+    <a type="button" class="btn btn-primary btn-lg btn-block" href="cliente">Registro de Cliente</a>
+    <a type="button" class="btn btn-secondary btn-lg btn-block" href="cartaz">Criar Cartaz</a>
+    <a type="button" class="btn btn-primary btn-lg btn-block" href="filme_list">Filmes em Cartaz</a>
+    <a type="button" class="btn btn-secondary btn-lg btn-block" href="admin" target="_blank">Página do Adminstrador</a>
+    {% endbuttons %}
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>

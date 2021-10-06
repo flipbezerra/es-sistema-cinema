@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load bootstrap4 %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Inicial</title>
+    {% bootstrap_css %}
+</head>
+<body>
+    {% bootstrap_messages %}
+    <style>
+    .espaco-2cm {
+    margin-bottom: 2cm;
+    }
+    </style>
+    <p class="espaco-2cm"></p>
+        {% buttons %}
+            <a type="button" class="btn btn-primary btn-lg btn-block" href="index_auth">Página de Usuário</a>
+            <a type="button" class="btn btn-secondary btn-lg btn-block" href="filme_list">Filmes em Cartaz</a>
+            <! target="_blank" abre uma nova aba>
+            <a type="button" class="btn btn-primary btn-lg btn-block" href="admin" target="_blank">Fazer Login</a>
+        {% endbuttons %}
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>
