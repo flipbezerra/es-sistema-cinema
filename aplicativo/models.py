@@ -1,16 +1,6 @@
 from django.db import models
 from stdimage import StdImageField
 
-
-class Cliente(models.Model):
-    nome = models.CharField('Nome', max_length=32)
-    sobrenome = models.CharField('Sobrenome', max_length=32)
-    email = models.EmailField('Email', max_length=32)
-
-    def __str__(self):
-        return "{}".format(self.nome)
-
-
 class Assentos(models.Model):
     registro = models.CharField('Sigla', max_length=4)
     livre = models.BooleanField(default=True)
@@ -46,9 +36,3 @@ class Filme(models.Model):
 
     def __str__(self):
         return "{}".format(self.nome)
-
-
-class Recibo(models.Model):
-    assento = models.IntegerField()
-    preco = models.DecimalField(max_digits=16, decimal_places=2)
-

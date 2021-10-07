@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from GerenciaCinema import settings
-from aplicativo.models import Filme, Cliente, Cartaz, Assentos
+from aplicativo.models import Filme, Cartaz, Assentos
 
 
 class FilmesModelForm(forms.ModelForm):
@@ -12,13 +12,6 @@ class FilmesModelForm(forms.ModelForm):
         widgets = {
             'duracao': forms.TextInput(attrs={'placeholder': '0h00m'})
         }
-
-
-class ClienteModelForm(forms.ModelForm):
-    class Meta:
-        model = Cliente
-        fields = ['nome', 'sobrenome', 'email']
-
 
 class RegistroClienteModelForm(UserCreationForm):
     first_name = forms.CharField(label='Nome', max_length=32)
@@ -42,4 +35,3 @@ class AssentoModelForm(forms.ModelForm):
     class Meta:
         model = Assentos
         fields = []
-

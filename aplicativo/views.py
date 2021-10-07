@@ -2,10 +2,8 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from aplicativo.models import Filme, Assentos
-from aplicativo.forms import FilmesModelForm, ClienteModelForm, RegistroClienteModelForm, CartazModelForm, \
+from aplicativo.forms import FilmesModelForm, RegistroClienteModelForm, CartazModelForm, \
     AssentoModelForm
-
-
 # Create your views here.
 
 def index(request):
@@ -24,7 +22,6 @@ def filme_list(request):
     return render(request, 'filme_list.html', context)
 
 def registrar(request):
-    if request.user.is_authenticated:
         if request.method == 'POST':
             form = RegistroClienteModelForm(request.POST)
             if form.is_valid():
@@ -43,8 +40,6 @@ def registrar(request):
             'form': form
         }
         return render(request, 'registrar.html', context)
-    else:
-        return redirect(index)
 
 def filmes(request):
     if request.user.is_authenticated:
@@ -64,27 +59,6 @@ def filmes(request):
         return render(request, 'filmes.html', context)
     else:
         return redirect(index)
-
-
-def cliente(request):
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            form = ClienteModelForm(request.POST)
-            if form.is_valid():
-                form.save()
-                messages.success(request, 'Cliente cadastrado com sucesso!')
-                form = ClienteModelForm()
-            else:
-                messages.error(request, 'Cliente não cadastrado!')
-        else:
-            form = ClienteModelForm()
-        context = {
-            'form': form
-        }
-        return render(request, 'cliente.html', context)
-    else:
-        return redirect(index)
-
 
 def cartaz(request):
     if request.user.is_authenticated:
