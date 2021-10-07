@@ -2,8 +2,7 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from aplicativo.models import Filme, Assentos
-from aplicativo.forms import FilmesModelForm, RegistroClienteModelForm, CartazModelForm, \
-    AssentoModelForm
+from aplicativo.forms import FilmesModelForm, RegistroClienteModelForm, CartazModelForm, AssentoModelForm
 # Create your views here.
 
 def index(request):

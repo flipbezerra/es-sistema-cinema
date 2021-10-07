@@ -5,7 +5,7 @@ A instalação do Django e das libraries constando em requirements.txt são nece
 da aplicação e podem ser instaladas com o comando "pip install -r requirements.txt"
 
 Conta de Administrador do Django:
-Usuário:admin
+Usuário:admin123
 Senha:admin123
 
 Tem um Forms para Usuário, Filme, Cartaz e Assento
