@@ -1,5 +1,5 @@
 # Projeto_Cinema
-Projeto de Engenharia de Software I
+Projeto de Engenharia de Software I e II
 
 A instalação do Django e das libraries constando em requirements.txt são necessárias para o funcionamento
 da aplicação e podem ser instaladas com o comando "pip install -r requirements.txt"
