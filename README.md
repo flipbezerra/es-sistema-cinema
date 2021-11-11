@@ -1,4 +1,4 @@
-# Projeto_Cinema
+# Projeto Cinema Comunitário
 Projeto de Engenharia de Software I e II
 
 A instalação do Django e das libraries constando em requirements.txt são necessárias para o funcionamento
