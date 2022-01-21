@@ -8,7 +8,7 @@ Conta de Administrador do Django:
 Usuário:admin123
 Senha:admin123
 
-Tem um Forms para Usuário, Filme, Cartaz e Assento
+O sistema possui registros do tipo Usuário, Filme, Cartaz e Assento, cada um contendo um formulário
 
 A página de Usuário é gerenciada pelo Django-admin
 
