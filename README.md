@@ -1,4 +1,4 @@
-# Projeto Cinema Comunitário
+# Projeto de Cinema Comunitário
 Projeto de Engenharia de Software I e II
 
 A instalação do Django e das libraries constando em requirements.txt são necessárias para o funcionamento
@@ -12,11 +12,11 @@ O sistema possui registros do tipo Usuário, Filme, Cartaz e Assento, cada um co
 
 A página de Usuário é gerenciada pelo Django-admin
 
-A página Index é a página do usuário não autenticado, ele tem acesso apenas aos cartazes
+A página index é a página do usuário não autenticado, ele tem acesso apenas aos cartazes
 
-A página Index_auth é a página do usuário/administrador
+A página index_auth é a página do usuário/administrador
 
-Os forms só podem acessados por administradores ou usuários autenticados
+Os formulários só podem acessados por administradores ou usuários autenticados
 
 Para ter uma lista de filmes, é necessário ter filmes, e para registrar filmes é necessário criar cartazes
 
