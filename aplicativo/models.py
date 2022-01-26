@@ -1,38 +1,51 @@
 from django.db import models
-from stdimage import StdImageField
+from django.urls import reverse
+#from stdimage import StdImageField
 
-class Assentos(models.Model):
-    registro = models.CharField('Sigla', max_length=4)
-    livre = models.BooleanField(default=True)
+# Create your models here.
+class AdminSide(models.Model):
+    username = models.CharField(max_length=25)
+    password = models.CharField(max_length=16)
 
-    def __str__(self):
-        return "{} | Livre ={}".format(self.registro, self.livre)
+class MovieMaster(models.Model):
+    m_name = models.CharField('Nome', max_length=50)
+    m_desc = models.CharField('Sinopse', max_length=128)
+    m_image = models.ImageField('Capa do Filme', upload_to="pics/")
 
-class Cartaz(models.Model):
-    dataCartaz = models.DateTimeField(verbose_name='Data do Cartaz')
-    assentos = models.ManyToManyField(Assentos)
+    class Meta:
+        unique_together = ["m_name", "m_desc", "m_image",]
 
-    def __str__(self):
-        return "Dia {} ás {}".format(self.dataCartaz.strftime('%d/%m/%Y'), self.dataCartaz.strftime('%H:%M'))
+    def get_absolute_url(self):
+        return reverse("setadmin:addmovie")
 
-class Filme(models.Model):
-    CATEGORIA_CHOICES = (
-        ('Action', 'Ação'), ('Adventure', 'Aventura'), ('Comedy', 'Comédia'), ('Terror', 'Terror'), ('Drama', 'Drama'),
-        ('Fantasy', 'Fantasia'), ('Sci-Fi', 'Ficção'), ('Romance', 'Romance')
-    )
+    def str(self):
+        return self.m_name
 
-    CLASSIFICACAO_CHOICES = (
-        ('Livre', 'Livre'), ('10', '10+'), ('12', '12+'), ('14', '14+'),
-        ('16', '16+'), ('18', '18+')
-    )
+class SetMovie(models.Model):
+    active = models.ForeignKey(MovieMaster, on_delete=models.CASCADE)
+    show = models.CharField('Sessão', max_length=50)
+    start_time = models.DateField()
+    end_time = models.DateField()
+    price = models.IntegerField()
+    seats = models.CharField(max_length=100, default="")
 
-    cartaz = models.OneToOneField(Cartaz, on_delete=models.CASCADE)
-    nome = models.CharField('Nome', max_length=16)
-    sinopse = models.CharField('Sinopse', max_length=128)
-    categoria = models.CharField(max_length=32, choices=CATEGORIA_CHOICES)
-    classificacao = models.CharField(max_length=32, choices=CLASSIFICACAO_CHOICES)
-    duracao = models.CharField('Duração', max_length=16)
-    capa = StdImageField('Capa do Filme', upload_to='imagens', variations={'thumb': (90, 90)})
+    class Meta:
+        unique_together = ["active", "show", "start_time", "end_time"]
 
-    def __str__(self):
-        return "{}".format(self.nome)
+    def get_absolute_url(self):
+        return reverse("setadmin:setmovie")
+    
+#class Filme(models.Model):
+#    CLASSIFICACAO_CHOICES = (
+#        ('Livre', 'Livre'), ('10', '10+'), ('12', '12+'), ('14', '14+'),
+#        ('16', '16+'), ('18', '18+')
+#    )
+#    
+#    nome = models.CharField('Nome', max_length=16)
+#    sinopse = models.CharField('Sinopse', max_length=128)
+#    classificacao = models.CharField(max_length=32, choices=CLASSIFICACAO_CHOICES)
+#    duracao = models.CharField('Duração', max_length=16)
+#    capa = StdImageField('Capa do Filme', upload_to='imagens', variations={'thumb': (90, 90)})
+#
+#    def __str__(self):
+#        return "{}".format(self.nome)

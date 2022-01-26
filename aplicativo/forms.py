@@ -1,37 +1,31 @@
-from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from GerenciaCinema import settings
-from aplicativo.models import Filme, Cartaz, Assentos
+"""from django import forms
+from . import models
 
-
-class FilmesModelForm(forms.ModelForm):
+class AddMovieForm(forms.ModelForm):
     class Meta:
-        model = Filme
-        fields = ['cartaz', 'nome', 'sinopse', 'categoria', 'classificacao', 'duracao', 'capa']
+        model = models.MovieMaster
+        fields = ('m_name', 'm_desc', 'm_image')
+
         widgets = {
-            'duracao': forms.TextInput(attrs={'placeholder': '0h00m'})
+            'm_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'm_desc': forms.TextInput(attrs={'class': 'form-control'}),
+            # 'm_image': forms.FileInput(attrs={'class': 'form-control'}),
         }
 
-class RegistroClienteModelForm(UserCreationForm):
-    first_name = forms.CharField(label='Nome', max_length=32)
-    last_name = forms.CharField(label='Sobrenome', max_length=32)
-    email = forms.EmailField(max_length=32)
+class SetMovieForm(forms.ModelForm):
+
+    # movie_choice = models.MovieMaster.objects.filter(setmovie__isnull=False)
 
     class Meta:
-        model = User
-        fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
+        model = models.SetMovie
+        fields = ('active' ,'start_time', 'end_time', 'show', 'price')
+        movie_choice = models.MovieMaster.objects.filter(setmovie__isnull=True)
 
-class CartazModelForm(forms.ModelForm):
-    class Meta:
-        model = Cartaz
-        fields = ['dataCartaz', 'assentos']
         widgets = {
-            'dataCartaz': forms.DateInput(format=settings.DATETIME_INPUT_FORMATS,
-                                          attrs={'placeholder': 'Ex:. 01/01/2000 00:00'})
+            'active': forms.Select(choices=movie_choice,attrs={'class': 'form-control', 'style':'width:300px'}),
+            'show':forms.Select(choices=(("1", "Morning"),("2", "AfterNoon"),("3", "Evening"),("4", "Night")) ,attrs={'class': 'form-control', 'style':'width:300px'}),
+            'start_time': forms.DateInput(attrs={'class': 'form-control', 'id':'datepicker', 'style':'width:140px;'}),
+            'end_time': forms.DateInput(attrs={'class': 'form-control', 'id':'datepicker1', 'style':'width:140px;'}), 
+            'price': forms.NumberInput(attrs={'class': 'form-control', 'style':'width:140px;'})      
         }
-
-class AssentoModelForm(forms.ModelForm):
-    class Meta:
-        model = Assentos
-        fields = []
+"""  

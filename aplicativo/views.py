@@ -1,98 +1,81 @@
-from django.contrib.auth import login, authenticate
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from aplicativo.models import Filme, Assentos
-from aplicativo.forms import FilmesModelForm, RegistroClienteModelForm, CartazModelForm, AssentoModelForm
+"""from django.shortcuts import render, redirect
+from django.views import generic
+from . import models
+from .models import SetMovie, MovieMaster
+from . import forms
+from django.views import View
+from django.contrib.auth import authenticate, login, logout
+from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
+from aplicativo.models import BookedSeatsModel
+from django.http import JsonResponse
 # Create your views here.
 
-def index(request):
-    return render(request, 'index.html')
+## Página de login do admin
+class LoiginAdmin(View):
+    template_name = "aplicativo/admin_login.html"
 
-def index_auth(request):
-    if request.user.is_authenticated:
-        return render(request, 'index_auth.html')
-    else:
-        return redirect(index)
+    def get(self, request, *args, **kwargs):
+        
+        return render(request, self.template_name)
 
-def filme_list(request):
-    context = {
-        'filmes': Filme.objects.all()
-    }
-    return render(request, 'filme_list.html', context)
+    def post(self,request, *args, **kwargs):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
 
-def registrar(request):
-        if request.method == 'POST':
-            form = RegistroClienteModelForm(request.POST)
-            if form.is_valid():
-                form.save()
-                username = form.cleaned_data.get('username')
-                raw_password = form.cleaned_data.get('password1')
-                user = authenticate(username=username, password=raw_password)
+        if user is not None:
+            superusers = User.objects.get(username = username)
+            print("-------------------------------------")
+            print(superusers.username)
+            print(superusers.is_superuser)
+            print("--------------------------------------")
+            if superusers.is_superuser == True:
                 login(request, user)
-                return redirect(index)
-            else:
-                messages.error(request, 'Erro no cadastro do Usuário!')
+                return redirect('../dashboard/')
+
         else:
-            form = RegistroClienteModelForm
+            return render(request, self.template_name)
 
-        context = {
-            'form': form
-        }
-        return render(request, 'registrar.html', context)
 
-def filmes(request):
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            form = FilmesModelForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.save()
-                messages.success(request, 'Filme registrado com sucesso!')
-                form = FilmesModelForm()
-            else:
-                messages.error(request, 'Filme não registrado!')
-        else:
-            form = FilmesModelForm()
-        context = {
-            'form': form
-        }
-        return render(request, 'filmes.html', context)
-    else:
-        return redirect(index)
+def adminLogout(request):
+    logout(request)
+    return redirect('../login/')
 
-def cartaz(request):
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            form = CartazModelForm(request.POST)
-            if form.is_valid():
-                form.save()
-                messages.success(request, 'Cartaz criado com sucesso!')
-                form = CartazModelForm()
-            else:
-                messages.error(request, 'Cartaz não criado!')
-        else:
-            form = CartazModelForm()
-        context = {
-            'form': form
-        }
-        return render(request, 'cartaz.html', context)
-    else:
-        return redirect(index)
 
-def assento(request):
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            form = AssentoModelForm(request.POST)
-            if form.is_valid():
+# Admin dashboard
+class Dashboard(generic.ListView):
+    model_add = models.MovieMaster
+    model_set = models.SetMovie
+    movies = MovieMaster.objects.filter(setmovie__isnull=False).distinct()
+    # context_object_name = 'moviesss'
+    model = MovieMaster
 
-                messages.success(request, 'Assentos Reservados!')
-            else:
-                messages.error(request, 'Erro!')
-        else:
-            form = AssentoModelForm()
-        context = {
-            'form': form,
-            'assento': Assentos.objects.all()
-        }
-        return render(request, 'assento.html', context)
-    else:
-        return redirect(filme_list)
+    template_name = "aplicativo/dashboard.html"
+
+    def get_context_data(self, **kwargs):
+        movies = MovieMaster.objects.filter(setmovie__isnull=False).distinct()
+        context = super().get_context_data(**kwargs)
+        context['movies'] = movies
+        return context
+
+
+# Adiciona os filmes
+class AddMovies(generic.CreateView):  
+    form_class = forms.AddMovieForm
+    model = models.MovieMaster
+    template_name = "aplicativo/addmovies.html"
+    # fields = '__all__'
+
+# Define os filmes como visiveis para o cliente
+class SetMovies(generic.CreateView):
+    form_class = forms.SetMovieForm
+    model = models.SetMovie
+    # context_object_name = 'movies'
+    # def post(self, request, *args, **kwargs): 
+    #     if request.method == 'POST':
+    #         request.POST['']
+    #         models.MovieGraphCount(m_name=)
+    
+    template_name = "aplicativo/setmovies.html"
+"""

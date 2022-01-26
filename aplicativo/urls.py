@@ -1,15 +1,18 @@
+"""from django.urls import path
+from . import views
+from django.conf import settings
 from django.conf.urls.static import static
-from aplicativo.views import index, index_auth, filmes, filme_list, cartaz, assento
-from django.urls import path
-from GerenciaCinema import settings
 
-app_name = 'aplicativo'
+app_name='setadmin'
 
 urlpatterns = [
-    path('', index),
-    path('index_auth', index_auth, name='index_auth'),
-    path('filmes', filmes, name='filmes'),
-    path('filmes_cartaz', filme_list, name='filmes_cartaz'),
-    path('cartaz', cartaz, name='cartaz'),
-    path('assento', assento, name='assento'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('dashboard/', views.Dashboard.as_view(), name='dashboard'),
+    path('addmovie/', views.AddMovies.as_view(), name='addmovie'),
+    path('setmovie/', views.SetMovies.as_view(), name='setmovie'),
+    path('adminlogin/', views.LoiginAdmin.as_view(), name='adminlogin'),
+    path('logout/', views.adminLogout, name='logout'),
+    # path('apidata/', views.movie_chart, name='apidata'),
+]
+
+urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+"""
