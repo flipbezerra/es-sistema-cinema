@@ -3,7 +3,10 @@
 {% load static %}
 <html lang="pt-br">
 <head>
-    <title>Cadastro - Cine Família</title>
+    
+    {% block titulo%}
+
+    {% endblock titulo%}
     <!-- Required meta tags -->
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +25,7 @@
             <li><a class="menu" href="#">Em Breve</a></li>
             <li><a class="menu" href="#">Sobre</a></li>
             <li><a class="menu" href="administrador">Página do Administrador</a></li>
+            
             <li><a class="menu" href="logar">Login/Cadastro</a></li>
         </ul>
     </nav>

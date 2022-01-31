@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from aplicativo.models import Filme, Assentos
@@ -16,7 +16,7 @@ def index_auth(request):
     context = {
     'filmes': Filme.objects.all()
     }
-    if request.user.is_authenticated:
+    if request.user.is_authenticated or request.user_is_superuser:
         return render(request, 'index_auth.html')
     else:
         return redirect(index)
@@ -35,7 +35,7 @@ def logar(request):
             user = form.get_user()
             login(request, user)
             messages.success(request, 'Usuário conectado!')
-            return redirect(index)
+            return redirect(index_auth)
     else:
         form = AuthenticationForm()
 
@@ -44,6 +44,11 @@ def logar(request):
     }
     #linha alterada
     return render(request, 'logar.html', context)
+
+def deslogar(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect(index_auth)
 
 def cadastro(request):
     if request.method == 'POST':
@@ -81,7 +86,7 @@ def filmes(request):
         }
         return render(request, 'filmes.html', context)
     else:
-        return redirect(index)
+        return redirect(index_auth)
 
 def sessoes(request):
     if request.user.is_authenticated:
@@ -100,7 +105,7 @@ def sessoes(request):
         }
         return render(request, 'sessoes.html', context)
     else:
-        return redirect(index)
+        return redirect(index_auth)
 
 def assentos(request):
     if request.user.is_authenticated:
@@ -118,4 +123,4 @@ def assentos(request):
         }
         return render(request, 'assentos.html', context)
     else:
-        return redirect(index)
+        return redirect(index_auth)

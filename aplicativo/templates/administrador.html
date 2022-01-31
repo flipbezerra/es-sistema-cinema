@@ -4,7 +4,9 @@
 <html lang="pt-br">
 <head>
 
-    <title>Home do Administrador - Cine Família</title>
+    {% block titulo %}
+        <title>Home do Administrador - Cine Família</title>
+    {% endblock titulo %}
 
 </head>
 <body>
@@ -12,9 +14,9 @@
     {% block conteudo %}
         {% bootstrap_messages %}
         {% buttons %}
-            <a type="button" class="btn btn-primary btn-lg btn-block" href="filmes">Adicionar Filme</a>
-            <a type="button" class="btn btn-primary btn-lg btn-block" href="sessões">Criar Sessão</a>
-            <a type="button" class="btn btn-primary btn-lg btn-block" href="assentos">Adicionar Assento</a>   
+            <a type="button" class="btn btn-primary btn-block" href="filmes">Adicionar Filme</a>
+            <a type="button" class="btn btn-primary btn-block" href="sessoes">Criar Sessão</a>
+            <a type="button" class="btn btn-primary btn-block" href="assentos">Adicionar Assento</a>   
         {% endbuttons %}
     {% endblock conteudo %}
 

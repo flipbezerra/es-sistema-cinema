@@ -4,21 +4,24 @@
 <html lang="pt-br">
 <head>
 
-    <title>Home - Cine Família</title>
+    {% block titulo %}
+        <title>Home - Cine Família</title>
+    {% endblock titulo %}
 
 </head>
 <body class="corpo">
     {% block conteudo %}
         <div class="row">
             {% for filme in filmes %}
-            <div class="col-sm-2">
+            <div class="card-deck">
                 <div class="card">
-                    <img class="card-img-top" src="{{filme.capa.url}}">
+                    <img class="card-img-top" src="{{filme.capa.url}}" alt="Capa do filme">
                     <div class="card-body">
                         <h5 class="card-title">{{filme.nome}}</h5>
-                        <p class="card-text">
-                            ({{filme.duracao}}) Classificação: {{filme.classificacao}}<br>
-                            Sinopse: {{filme.sinopse}}</p>
+                        <p class="card-text"> ({{filme.duracao}})<br> 
+                            Classificação: {{filme.classificacao}}<br>
+                            Sinopse: {{filme.sinopse}}
+                        </p>
                         <a href="#" class="btn btn-primary">Assistir</a>
                     </div>
                 </div>
