@@ -1,43 +1,22 @@
 <!DOCTYPE html>
+{% extends "base.html" %}
 {% load bootstrap4 %}
-{% load static %}
 <html lang="pt-br">
 <head>
 
     <title>Home do Administrador - Cine Família</title>
-    <!-- Required meta tags -->
-    <meta charset='utf-8' />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- Formatação personalizada usando CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/personalizado.css' %}">
-    {% bootstrap_css %}
 
 </head>
-<header>
-
-    <h1>Cine <span>Família</span></h1>   
-
-    <nav>
-        <ul>
-            <li><a href="">Filmes em Cartaz</a></li>
-            <li><a href="#">Em Breve</a></li>
-            <li><a href="#">Sobre</a></li>
-            <li><a href="admin">Página do Administrador</a></li>
-            <li><a href="admin">Login/Cadastro</a></li>
-        </ul>
-    </nav>
-
-</header>
 <body>
 
-    {% bootstrap_messages %}
-    {% buttons %}
-        <a type="button" class="btn btn-primary btn-lg btn-block" href="filmes">Adicionar Filme</a>
-        <a type="button" class="btn btn-secondary btn-lg btn-block" href="sessões">Criar Sessão</a>
-        <a type="button" class="btn btn-secondary btn-lg btn-block" href="assentos">Adicionar Assento</a>   
-    {% endbuttons %}
-    <script src="{% static 'js/personalizado.js' %}"></script>
-    {% bootstrap_javascript jquery='full' %}
+    {% block conteudo %}
+        {% bootstrap_messages %}
+        {% buttons %}
+            <a type="button" class="btn btn-primary btn-lg btn-block" href="filmes">Adicionar Filme</a>
+            <a type="button" class="btn btn-primary btn-lg btn-block" href="sessões">Criar Sessão</a>
+            <a type="button" class="btn btn-primary btn-lg btn-block" href="assentos">Adicionar Assento</a>   
+        {% endbuttons %}
+    {% endblock conteudo %}
 
 </body>
 </html>

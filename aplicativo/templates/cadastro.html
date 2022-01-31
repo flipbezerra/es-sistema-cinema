@@ -4,7 +4,7 @@
 <html lang="pt-br">
 <head>
 
-    <title>Login - Cine Família</title>
+    <title>Cadastro - Cine Família</title>
 
 </head>
 <body>
@@ -12,17 +12,15 @@
     {% block conteudo %}
         <div class="container">
             <br>
-            <h2> Login </h2>
+            <h2> Cadastro de Usuário </h2>
             <br>
-            <form method="post" class="form" action="{% url 'logar' %}" autocomplete="off">
+            {% bootstrap_messages %}
+            <form method="post" class="form" action="{% url 'cadastro' %}" autocomplete="off">
                 {% csrf_token %}
                 {% bootstrap_form form %}
                 {% buttons %}
                     <button type="submit" class="btn btn-primary">
-                        Efetuar login 
-                    </button>
-                    <button onclick="location.href = 'cadastro';" id="cadastroButton" class="btn btn-primary">
-                    Cadastro
+                        Efetuar cadastro 
                     </button>
                 {% endbuttons %}
             </form>

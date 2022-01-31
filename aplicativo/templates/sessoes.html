@@ -4,25 +4,21 @@
 <html lang="pt-br">
 <head>
 
-    <title>Login - Cine Família</title>
+    <title>Criar Sessão - Cine Família</title>
 
 </head>
 <body>
 
     {% block conteudo %}
         <div class="container">
-            <br>
-            <h2> Login </h2>
-            <br>
-            <form method="post" class="form" action="{% url 'logar' %}" autocomplete="off">
+            <h1> Criar Sessão </h1> <br><br>
+            {% bootstrap_messages %}
+            <form method="post" action="{% url 'sessoes' %}" class="form" autocomplete="off" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% bootstrap_form form %}
                 {% buttons %}
                     <button type="submit" class="btn btn-primary">
-                        Efetuar login 
-                    </button>
-                    <button onclick="location.href = 'cadastro';" id="cadastroButton" class="btn btn-primary">
-                    Cadastro
+                        Criar Sessão
                     </button>
                 {% endbuttons %}
             </form>

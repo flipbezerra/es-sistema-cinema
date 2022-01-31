@@ -9,7 +9,7 @@ urlpatterns = [
     path('', index),
     path('index_auth', index_auth, name='index_auth'),
     path('filmes', filmes, name='filmes'),
-    path('sessões', sessoes, name='sessoes'),
+    path('sessoes', sessoes, name='sessoes'),
     path('assentos', assentos, name='assentos'),
     path('logar', logar, name='logar'),
     path('cadastro', cadastro, name='cadastro'),

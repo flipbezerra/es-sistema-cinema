@@ -1,58 +1,36 @@
 <!DOCTYPE html>
+{% extends "base.html" %}
 {% load bootstrap4 %}
-{% load static %}
 <html lang="pt-br">
 <head>
 
-    <title>Adição de Assento - Cine Família</title>
-    <!-- Required meta tags -->
-    <meta charset='utf-8' />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- Formatação personalizada usando CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/personalizado.css' %}">
-    {% bootstrap_css %}
+    <title>Adicionar Assento - Cine Família</title>
 
 </head>
-<header>
-
-    <h1>Cine <span>Família</span></h1>   
-
-    <nav>
-        <ul>
-            <li><a href="">Filmes em Cartaz</a></li>
-            <li><a href="#">Em Breve</a></li>
-            <li><a href="#">Sobre</a></li>
-            <li><a href="admin">Página do Administrador</a></li>
-            <li><a href="#">Login/Cadastro</a></li>
-        </ul>
-    </nav>
-
-</header>
 <body>
 
-    <div class="container">
-        <h1>Seleção de Assento</h1>
-        <br>
-        {% bootstrap_messages %}
-        <form method="post" action="{% url 'assentos' %}" class="form" autocomplete="off" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            {% for assentos in assento %}
-                {% if assentos.livre %}
-                <input type="checkbox" id="{{assentos.livre}}" value="False"/>
-                {{assentos.registro}}
-                {% endif %}
-            {% endfor %}
-            {% buttons %}
+    {% block conteudo %}
+        <div class="container">
+            <h1>Adicionar Assento</h1><br><br>
             <br>
-            <button type="submit" class="btn btn-primary">
-                Escolher Assento
-            </button>
-            {% endbuttons %}
-        </form>
-    </div>
+            {% bootstrap_messages %}
+            <form method="post" action="{% url 'assentos' %}" class="form" autocomplete="off" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% for assentos in assento %}
+                    {% if assentos.livre %}
+                        <input type="checkbox" name="{{assentos.livre}}" id="{{assentos.livre}}" value="0"/>
+                    {% endif %}
+                {% endfor %}
+                {% buttons %}
+                    <br>
+                    <button type="submit" class="btn btn-primary">
+                        Adicionar Assento
+                    </button>
+                {% endbuttons %}
+            </form>
+        </div>
+    {% endblock conteudo %}
 
-    <script src="{% static 'js/personalizado.js' %}"></script>
-    {% bootstrap_javascript jquery='full' %}
 </body>
 </html>

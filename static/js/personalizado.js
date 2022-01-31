@@ -18,13 +18,9 @@ Close.addEventListener('click',()=>{
     }
 });
 
-$(".alert").fadeTo(4000, 300).slideUp(300, function () {
-    $(".alert").alert('close');
-});
-
-$(document).ready(function () {
+window.setTimeout(function() {
     /* Instruções javascript - limite de tempo para os alertas serem exibidos */
-    $(".alert").fadeTo(4000, 300).slideUp(300, function () {
-        $(".alert").alert('close');
-    });
-});
+    $(".messages").fadeTo(400, 0).slideUp(400, function(){
+      $(this).remove();
+   });
+}, 3000);

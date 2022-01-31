@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from aplicativo.models import Filme, Assentos
-from aplicativo.forms import FilmesModelForm, CartazModelForm, AssentoModelForm
+from aplicativo.forms import FilmesModelForm, SessaoModelForm, AssentoModelForm
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 # Create your views here.
 
@@ -86,19 +86,19 @@ def filmes(request):
 def sessoes(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            form = CartazModelForm(request.POST)
+            form = SessaoModelForm(request.POST)
             if form.is_valid():
                 form.save()
                 messages.success(request, 'Sessão criada com sucesso.')
-                form = CartazModelForm()
+                form = SessaoModelForm()
             else:
                 messages.error(request, 'Erro! Sessão não pôde ser criada.')
         else:
-            form = CartazModelForm()
+            form = SessaoModelForm()
         context = {
             'form': form
         }
-        return render(request, 'cartazes.html', context)
+        return render(request, 'sessoes.html', context)
     else:
         return redirect(index)
 
