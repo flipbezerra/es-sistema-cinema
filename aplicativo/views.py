@@ -1,44 +1,68 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from aplicativo.models import Filme, Assentos
-from aplicativo.forms import FilmesModelForm, RegistroClienteModelForm, CartazModelForm, AssentoModelForm
+from aplicativo.forms import FilmesModelForm, CartazModelForm, AssentoModelForm
+from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html')
+    context = {
+    'filmes': Filme.objects.all()
+    }
+    return render(request, 'index.html', context)
 
 def index_auth(request):
+    context = {
+    'filmes': Filme.objects.all()
+    }
     if request.user.is_authenticated:
         return render(request, 'index_auth.html')
     else:
         return redirect(index)
+    
+def administrador(request):
 
-def filme_list(request):
+    if request.user.is_superuser:
+        return render(request, 'administrador.html')
+    else:
+        return redirect(index_auth)
+
+def logar(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, 'Usuário conectado!')
+            return redirect(index)
+    else:
+        form = AuthenticationForm()
+
     context = {
-        'filmes': Filme.objects.all()
+        'form': form
     }
-    return render(request, 'filme_list.html', context)
+    #linha alterada
+    return render(request, 'logar.html', context)
 
-def registrar(request):
-        if request.method == 'POST':
-            form = RegistroClienteModelForm(request.POST)
-            if form.is_valid():
-                form.save()
-                username = form.cleaned_data.get('username')
-                raw_password = form.cleaned_data.get('password1')
-                user = authenticate(username=username, password=raw_password)
-                login(request, user)
-                return redirect(index)
-            else:
-                messages.error(request, 'Erro no cadastro do Usuário!')
+def cadastro(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+
+            form.save()
+            messages.success(request, 'Usuário cadastrado!')
+            form = UserCreationForm()
         else:
-            form = RegistroClienteModelForm
+            messages.error(request, 'Usuário não cadastrado!')
+    else:
+        form = UserCreationForm()
 
-        context = {
-            'form': form
-        }
-        return render(request, 'registrar.html', context)
+    context = {
+        'form': form
+    }
+    # linha alterada
+    return render(request, 'cadastro.html', context)
 
 def filmes(request):
     if request.user.is_authenticated:
@@ -46,10 +70,10 @@ def filmes(request):
             form = FilmesModelForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
-                messages.success(request, 'Filme registrado com sucesso!')
+                messages.success(request, 'Filme adicionado com sucesso!')
                 form = FilmesModelForm()
             else:
-                messages.error(request, 'Filme não registrado!')
+                messages.error(request, 'Erro! Filme não pôde ser adicionado.!')
         else:
             form = FilmesModelForm()
         context = {
@@ -59,40 +83,39 @@ def filmes(request):
     else:
         return redirect(index)
 
-def cartaz(request):
+def sessoes(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = CartazModelForm(request.POST)
             if form.is_valid():
                 form.save()
-                messages.success(request, 'Cartaz criado com sucesso!')
+                messages.success(request, 'Sessão criada com sucesso.')
                 form = CartazModelForm()
             else:
-                messages.error(request, 'Cartaz não criado!')
+                messages.error(request, 'Erro! Sessão não pôde ser criada.')
         else:
             form = CartazModelForm()
         context = {
             'form': form
         }
-        return render(request, 'cartaz.html', context)
+        return render(request, 'cartazes.html', context)
     else:
         return redirect(index)
 
-def assento(request):
+def assentos(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = AssentoModelForm(request.POST)
             if form.is_valid():
-
-                messages.success(request, 'Assentos Reservados!')
+                messages.success(request, 'Assento adicionado!')
             else:
-                messages.error(request, 'Erro!')
+                messages.error(request, 'Erro! Assento não pôde ser adicionado.')
         else:
             form = AssentoModelForm()
         context = {
             'form': form,
             'assento': Assentos.objects.all()
         }
-        return render(request, 'assento.html', context)
+        return render(request, 'assentos.html', context)
     else:
-        return redirect(filme_list)
+        return redirect(index)

@@ -1,53 +1,55 @@
 <!DOCTYPE html>
 {% load bootstrap4 %}
+{% load static %}
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Cinema - Eng. Software</title>
+
+    <title>Home - Cine Família</title>
+    <!-- Required meta tags -->
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Formatação personalizada usando CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/personalizado.css' %}">
     {% bootstrap_css %}
-    <style>
-            body, html{
-                margin: 0;
-                padding: 0;
-                background-color:black;
-            }
-            header{
-                width: 100%;
-                height: 70px;
-                background-color:grey;
-            }
-            h1{ 
-                position: absolute;
-                padding: 3px;
-                float: left;
-                margin-left: 2%;
-                margin-top: 10px;
-                font-family: 'Roboto Slab', serif;
-                color: blue;
-            }
-            span{
-                color: white;
-            }
-        </style>
+
 </head>
 <header>
-    <h1>Cinema <span>ES</span></h1>   
+
+    <h1>Cine <span>Família</span></h1>   
+
+    <nav>
+        <ul>
+            <li><a href="">Filmes em Cartaz</a></li>
+            <li><a href="#">Em Breve</a></li>
+            <li><a href="#">Sobre</a></li>
+            <li><a href="administrador">Página do Administrador</a></li>
+            <li><a href="logar">Login/Cadastro</a></li>
+        </ul>
+    </nav>
+
 </header>
 <body>
     {% bootstrap_messages %}
-    <style>
-    .espaco-2cm {
-    margin-bottom: 2cm;
-    }
-    </style>
-    <p class="espaco-2cm"></p>
-        {% buttons %}
-            <a type="button" class="btn btn-primary btn-lg btn-block" href="index_auth">Acesso da Administração</a>
-            <a type="button" class="btn btn-secondary btn-lg btn-block" href="filmes_cartaz">Filmes em Cartaz</a>
-            <a type="button" class="btn btn-primary btn-lg btn-block" href="registrar">Cadastrar Usuário</a>
-            <! target="_blank" abre uma nova aba>
-            <a type="button" class="btn btn-primary btn-lg btn-block" href="admin" target="_blank">Fazer Login</a>
-        {% endbuttons %}
-{% bootstrap_javascript jquery='full' %}
+
+    <div class="row">
+        {% for filme in filmes %}
+        <div class="col-sm-2">
+            <div class="card" style="width: 18rem;background-color:black;">
+                <img class="card-img-top" src="{{filme.capa.url}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{filme.nome}}</h5>
+                    <p class="card-text">{{filme.cartaz}}<br>
+                        ({{filme.duracao}}) Classificação: {{filme.classificacao}}<br>
+                        {{filme.categoria}}<br>
+                        Sinopse: {{filme.sinopse}}</p>
+                    <a href="assento" class="btn btn-primary">Assistir</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script src="{% static 'js/personalizado.js' %}"></script>
+    {% bootstrap_javascript jquery='full' %}
 </body>
 </html>

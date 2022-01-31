@@ -3,14 +3,15 @@
 {% load static %}
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Adicionar Filmes - Cine Família</title>
+
+    <title>Home do Administrador - Cine Família</title>
     <!-- Required meta tags -->
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Formatação personalizada usando CSS -->
+     <!-- Formatação personalizada usando CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/personalizado.css' %}">
     {% bootstrap_css %}
+
 </head>
 <header>
 
@@ -22,28 +23,21 @@
             <li><a href="#">Em Breve</a></li>
             <li><a href="#">Sobre</a></li>
             <li><a href="admin">Página do Administrador</a></li>
-            <li><a href="#">Login/Cadastro</a></li>
+            <li><a href="admin">Login/Cadastro</a></li>
         </ul>
     </nav>
 
 </header>
 <body>
 
-    <div class="container">
-        <h1>Adicionar Filme</h1>
-        {% bootstrap_messages %}
-        <form method="post" action="{% url 'filmes' %}" class="form" autocomplete="off" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            {% buttons %}
-                <button type="submit" class="btn btn-primary">
-                    Registrar Filme
-                </button>
-            {% endbuttons %}
-        </form>
-    </div>
-    
+    {% bootstrap_messages %}
+    {% buttons %}
+        <a type="button" class="btn btn-primary btn-lg btn-block" href="filmes">Adicionar Filme</a>
+        <a type="button" class="btn btn-secondary btn-lg btn-block" href="sessões">Criar Sessão</a>
+        <a type="button" class="btn btn-secondary btn-lg btn-block" href="assentos">Adicionar Assento</a>   
+    {% endbuttons %}
     <script src="{% static 'js/personalizado.js' %}"></script>
     {% bootstrap_javascript jquery='full' %}
+
 </body>
 </html>

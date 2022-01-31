@@ -22,8 +22,8 @@ class Filme(models.Model):
     )
 
     CLASSIFICACAO_CHOICES = (
-        ('Livre', 'Livre'), ('10', '10+'), ('12', '12+'), ('14', '14+'),
-        ('16', '16+'), ('18', '18+')
+        ('Livre', 'Livre'), ('10+', '10+'), ('12+', '12+'), ('14+', '14+'),
+        ('16+', '16+'), ('18+', '18+')
     )
 
     cartaz = models.OneToOneField(Cartaz, on_delete=models.CASCADE)

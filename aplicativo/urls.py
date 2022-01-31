@@ -1,5 +1,5 @@
 from django.conf.urls.static import static
-from aplicativo.views import index, index_auth, filmes, filme_list, cartaz, assento
+from aplicativo.views import index, index_auth, filmes, sessoes, assentos, logar, cadastro, administrador
 from django.urls import path
 from GerenciaCinema import settings
 
@@ -9,7 +9,9 @@ urlpatterns = [
     path('', index),
     path('index_auth', index_auth, name='index_auth'),
     path('filmes', filmes, name='filmes'),
-    path('filmes_cartaz', filme_list, name='filmes_cartaz'),
-    path('cartaz', cartaz, name='cartaz'),
-    path('assento', assento, name='assento'),
+    path('sessões', sessoes, name='sessoes'),
+    path('assentos', assentos, name='assentos'),
+    path('logar', logar, name='logar'),
+    path('cadastro', cadastro, name='cadastro'),
+    path('administrador', administrador, name='administrador'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

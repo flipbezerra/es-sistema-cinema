@@ -3,14 +3,15 @@
 {% load static %}
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Adicionar Filmes - Cine Família</title>
+
+    <title>Login - Cine Família</title>
     <!-- Required meta tags -->
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Formatação personalizada usando CSS -->
+     <!-- Formatação personalizada usando CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/personalizado.css' %}">
     {% bootstrap_css %}
+
 </head>
 <header>
 
@@ -28,16 +29,21 @@
 
 </header>
 <body>
-
+    {% bootstrap_messages %}
+    
     <div class="container">
-        <h1>Adicionar Filme</h1>
-        {% bootstrap_messages %}
-        <form method="post" action="{% url 'filmes' %}" class="form" autocomplete="off" enctype="multipart/form-data">
+        <br>
+        <h2> Login </h2>
+        <br>
+        <form method="post" class="form" action="{% url 'logar' %}" autocomplete="off">
             {% csrf_token %}
             {% bootstrap_form form %}
             {% buttons %}
                 <button type="submit" class="btn btn-primary">
-                    Registrar Filme
+                    Efetuar login 
+                </button>
+                <button onclick="location.href = 'cadastro';" id="cadastroButton" class="btn btn-primary">
+                Cadastro
                 </button>
             {% endbuttons %}
         </form>
