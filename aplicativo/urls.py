@@ -1,5 +1,5 @@
 from django.conf.urls.static import static
-from aplicativo.views import index, index_auth, filmes, sessoes, assentos, logar, deslogar, cadastro, administrador
+from aplicativo.views import index, index_auth, filmes, sessoes, assentos, logar, deslogar, cadastro, administrador, indisponivel
 from django.urls import path
 from GerenciaCinema import settings
 
@@ -7,6 +7,7 @@ app_name = 'aplicativo'
 
 urlpatterns = [
     path('', index),
+    path('indisponivel', indisponivel, name='indisponivel'),
     path('index_auth', index_auth, name='index_auth'),
     path('filmes', filmes, name='filmes'),
     path('sessoes', sessoes, name='sessoes'),

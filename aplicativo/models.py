@@ -8,7 +8,7 @@ class Filme(models.Model):
     )
 
     nome = models.CharField('Nome', max_length=32)
-    sinopse = models.CharField('Sinopse', max_length=128)
+    sinopse = models.CharField('Sinopse', max_length=500)
     classificacao = models.CharField(max_length=32, choices=CLASSIFICACAO_CHOICES)
     duracao = models.CharField('Duração', max_length=16)
     capa = StdImageField('Capa do Filme', upload_to='imagens', variations={'thumb': (90, 90)})

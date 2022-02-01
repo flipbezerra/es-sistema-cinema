@@ -12,6 +12,9 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
+def indisponivel(request):
+    return render(request, 'indisponivel.html')
+
 def index_auth(request):
     context = {
     'filmes': Filme.objects.all()
