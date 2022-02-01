@@ -23,9 +23,9 @@
 <body>
 
     {% block conteudo %}
-        <div class="row" >
+        <div class="row">
             {% for filme in filmes %}
-            <div class="col-sm-3">
+            <div class="col">
                 <div class="card">
                     <img class="card-img-top" src="{{filme.capa.url}}">
                     <div class="card-body">
@@ -38,14 +38,14 @@
                     </div>
                 </div>
             </div>
-                    <div class="modal" id="target{{filme.nome}}">
-            <div class="modal_container">
-                <span id="close" class="op-x"></span>
-                <div class="iframe_container">
-                    <iframe width="727" height="409" src="{{filme.trailer}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="modal" id="target{{filme.nome}}">
+                <div class="modal_container">
+                    <span id="close" class="op-x"></span>
+                    <div class="iframe_container">
+                        <iframe width="727" height="409" src="{{filme.trailer}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>{{filme.trailer}}
                 </div>
             </div>
-        </div>
             {% endfor %}
         </div>
 
