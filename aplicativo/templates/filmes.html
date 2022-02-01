@@ -10,15 +10,20 @@
 
 </head>
 <header>
+
     {% block login%}
-        <li><a class="menu" href="deslogar">Sair</a></li>
+        <li><form id="my_form" action="{% url 'deslogar' %}" method="post">
+                {% csrf_token %}
+                <a class="menu" href="javascript:$('#my_form').submit();">Sair</a>
+            </form>
+        </li>
     {% endblock login%}
+    
 </header>
 <body>
 
     {% block conteudo %}
         <div class="container">
-            {% bootstrap_messages %}
             <h1>Adicionar Filme</h1><br><br>
             <form method="post" action="{% url 'filmes' %}" class="form" autocomplete="off" enctype="multipart/form-data">
                 {% csrf_token %}

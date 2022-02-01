@@ -16,13 +16,12 @@ def index_auth(request):
     context = {
     'filmes': Filme.objects.all()
     }
-    if request.user.is_authenticated or request.user_is_superuser:
+    if request.user.is_authenticated:
         return render(request, 'index_auth.html', context)
     else:
-        return redirect(index)
+        return redirect(logar)
     
 def administrador(request):
-
     if request.user.is_superuser:
         return render(request, 'administrador.html')
     else:
@@ -42,13 +41,12 @@ def logar(request):
     context = {
         'form': form
     }
-    #linha alterada
     return render(request, 'logar.html', context)
 
 def deslogar(request):
     if request.method == 'POST':
         logout(request)
-        return redirect(index)
+        return redirect(index_auth)
 
 def cadastro(request):
     if request.method == 'POST':
@@ -66,7 +64,6 @@ def cadastro(request):
     context = {
         'form': form
     }
-    # linha alterada
     return render(request, 'cadastro.html', context)
 
 def filmes(request):

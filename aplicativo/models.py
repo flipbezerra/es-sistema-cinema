@@ -12,7 +12,7 @@ class Filme(models.Model):
     classificacao = models.CharField(max_length=32, choices=CLASSIFICACAO_CHOICES)
     duracao = models.CharField('Duração', max_length=16)
     capa = StdImageField('Capa do Filme', upload_to='imagens', variations={'thumb': (90, 90)})
-    trailer = models.CharField('Trailer do filme', max_length=32)
+    trailer = models.URLField("Trailer do Filme", max_length=100)
 
     def __str__(self):
         return "{}".format(self.nome)

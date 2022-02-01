@@ -10,14 +10,19 @@
 
 </head>
 <header>
+
     {% block login%}
-        <li><a class="menu" href="deslogar">Sair</a></li>
+        <li><form id="my_form" action="{% url 'deslogar' %}" method="post">
+                {% csrf_token %}
+                <a class="menu" href="javascript:$('#my_form').submit();">Sair</a>
+            </form>
+        </li>
     {% endblock login%}
+    
 </header>
 <body>
 
     {% block conteudo %}
-        {% bootstrap_messages %}
         {% buttons %}
             <a type="button" class="btn btn-primary btn-block" href="filmes">Adicionar Filme</a>
             <a type="button" class="btn btn-primary btn-block" href="sessoes">Criar Sessão</a>

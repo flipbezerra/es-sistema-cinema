@@ -10,14 +10,20 @@
 
 </head>
 <header>
+
     {% block login%}
-        <li><a class="menu" href="filmes">Sair</a></li>
+        <li><form id="my_form" action="{% url 'deslogar' %}" method="post">
+                {% csrf_token %}
+                <a class="menu" href="javascript:$('#my_form').submit();">Sair</a>
+            </form>
+        </li>
     {% endblock login%}
+    
 </header>
 <body>
 
     {% block conteudo %}
-        <div class="row">
+        <div class="row" >
             {% for filme in filmes %}
             <div class="col-sm-3">
                 <div class="card">
@@ -36,8 +42,8 @@
             <div class="modal_container">
                 <span id="close" class="op-x"></span>
                 <div class="iframe_container">
-                    <iframe width="727" height="409" src="https://www.youtube.com/embed/DbQFF57ho3g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>{{filme.trailer}}
+                    <iframe width="727" height="409" src="{{filme.trailer}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
             {% endfor %}
