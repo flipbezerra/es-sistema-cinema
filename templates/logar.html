@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load bootstrap4 %}
+<html lang="pt-br">
+<head>
+
+    {% block titulo %}
+        <title>Login - Cine Família</title>
+    {% endblock titulo %}
+
+</head>
+<header>
+
+    {% block login%}
+        <li><a class="menu" href="logar">Login/Cadastro</a></li>
+    {% endblock login%}
+    
+</header>
+<body>
+
+    {% block conteudo %}
+        <div class="container">
+            <br>
+            <h2> Login </h2>
+            <br>
+            <form method="post" class="form" action="{% url 'logar' %}" autocomplete="off">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">
+                        Efetuar login 
+                    </button>
+                    <button onclick="location.href = 'cadastro';" id="cadastroButton" class="btn btn-primary">
+                    Cadastro
+                    </button>
+                {% endbuttons %}
+            </form>
+        </div>
+    {% endblock conteudo %}
+
+</body>
+</html>

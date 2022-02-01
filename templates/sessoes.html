@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load bootstrap4 %}
+<html lang="pt-br">
+<head>
+
+    {% block titulo %}
+        <title>Home do Usuário - Cine Família</title>
+    {% endblock titulo %}
+
+</head>
+<header>
+
+    {% block login%}
+        <li><form id="my_form" action="{% url 'deslogar' %}" method="post">
+                {% csrf_token %}
+                <a class="menu" href="javascript:$('#my_form').submit();">Sair</a>
+            </form>
+        </li>
+    {% endblock login%}
+    
+</header>
+<body>
+
+    {% block conteudo %}
+        <div class="container">
+            <h1> Criar Sessão </h1> <br><br>
+            <form method="post" action="{% url 'sessoes' %}" class="form" autocomplete="off" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">
+                        Criar Sessão
+                    </button>
+                {% endbuttons %}
+            </form>
+        </div>
+    {% endblock conteudo %}
+
+</body>
+</html>

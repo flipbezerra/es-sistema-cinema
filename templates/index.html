@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load bootstrap4 %}
+<html lang="pt-br">
+<head>
+
+    {% block titulo %}
+        <title>Home - Cine Família</title>
+    {% endblock titulo %}
+
+</head>
+<header>
+    {% block login%}
+        <li><a class="menu" href="logar">Login/Cadastro</a></li>
+    {% endblock login%}
+</header>
+<body>
+
+    {% block conteudo %}
+        <div class="row">
+            {% for filme in filmes %}
+            <div class="col">
+                <div class="card">
+                    <img class="card-img-top" src="{{filme.capa.url}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{filme.nome}}</h5>
+                        <p class="card-text">
+                            ({{filme.duracao}}) Classificação: {{filme.classificacao}}<br>
+                            Sinopse: {{filme.sinopse}}</p>
+                        <a href="indisponivel" class="btn btn-primary">Assistir</a>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#target{{filme.nome}}">Trailer</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="target{{filme.nome}}">
+                <div class="modal_container">
+                    <span id="close" class="op-x"></span>
+                    <div class="iframe_container">
+                        <iframe width="727" height="409" src="{{filme.trailer}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>{{filme.trailer}}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    {% endblock conteudo %}
+
+</body>
+</html>

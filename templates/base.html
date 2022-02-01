@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load bootstrap4 %}
+{% load static %}
+<html lang="pt-br">
+<head>
+    
+    {% block titulo%}
+
+    {% endblock titulo%}
+    <!-- Required meta tags -->
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Formatação personalizada usando CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/personalizado.css' %}">
+    {% bootstrap_css %}
+
+</head>
+<header>
+
+    <h1>Cine <span>Família</span></h1>   
+
+    <nav>
+        <ul>
+            <li><a class="menu" href="index_auth">Filmes em Cartaz</a></li>
+            <li><a class="menu" href="indisponivel">Em Breve</a></li>
+            <li><a class="menu" href="indisponivel">Sobre</a></li>
+            <li><a class="menu" href="administrador">Página do Administrador</a></li>
+            {% block login%}
+
+            {% endblock login%}
+        </ul>
+    </nav>
+
+</header>
+<body>
+    {% bootstrap_messages %}
+    {% block conteudo %}
+
+    {% endblock conteudo %}
+    <script src="{% static 'js/personalizado.js' %}"></script>
+    {% bootstrap_javascript jquery='full' %}
+</body>
+</html>
