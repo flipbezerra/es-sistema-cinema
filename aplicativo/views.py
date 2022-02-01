@@ -17,7 +17,7 @@ def index_auth(request):
     'filmes': Filme.objects.all()
     }
     if request.user.is_authenticated or request.user_is_superuser:
-        return render(request, 'index_auth.html')
+        return render(request, 'index_auth.html', context)
     else:
         return redirect(index)
     
@@ -48,7 +48,7 @@ def logar(request):
 def deslogar(request):
     if request.method == 'POST':
         logout(request)
-        return redirect(index_auth)
+        return redirect(index)
 
 def cadastro(request):
     if request.method == 'POST':

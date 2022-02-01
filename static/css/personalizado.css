@@ -4,13 +4,10 @@
     box-sizing: border-box;
 }
 
-body.corpo {
-    margin: 0;
-    padding: 0;
+body {
     background-color:#cdcccc;
     display: grid;
     place-items: center;
-
 }
 
 header{
@@ -66,15 +63,11 @@ a:hover{
 }
 
 p.card-text{
-
     color: #80aaff;
-
 }
 
 h5.card-title{
-
     color: #80aaff;
-
 }
 
 img{
@@ -91,15 +84,6 @@ h2{
     bottom: 0;
 }
 
-.card{
-    width: 15rem;
-    background-color:black;
-}
-
-#cartazes{
-    background-color:white;
-}
-
 @keyframes pulse {
     0% {
         box-shadow: 0 0 0 0 rgba(0,0,0,0.3);
@@ -108,6 +92,12 @@ h2{
         box-shadow: 0 0 0 30px rgba(0,0,0,0);
     }
 }
+
+.card {
+    width: 12rem;
+    height: 15rem;
+}
+
 .modal {
     position: fixed;
     top: 0;
@@ -122,17 +112,23 @@ h2{
     visibility: hidden;
     transition: all .3s ease-out;
 }
+
 .modal.show {
     visibility: visible;
     pointer-events: all;
     opacity: 1;
 }
+
 .modal_container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
     width: 100%;
     max-width: 800px;
-    padding: 0 10px;
-    position: relative;
 }
+
 .modal_container #close {
     font-size: 1.75rem;
     float: right;
@@ -140,12 +136,14 @@ h2{
     margin: .5rem 0;
     cursor: pointer;
 }
+
 .iframe_container {
     position: relative;
     overflow: hidden;
     width: 100%;
     padding-top: 56.25%; /*16:9*/
 }
+
 .iframe_container iframe {
     position: absolute;
     top: 0;

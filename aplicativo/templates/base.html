@@ -21,12 +21,13 @@
 
     <nav>
         <ul>
-            <li><a class="menu" href="">Filmes em Cartaz</a></li>
+            <li><a class="menu" href="index_auth">Filmes em Cartaz</a></li>
             <li><a class="menu" href="#">Em Breve</a></li>
             <li><a class="menu" href="#">Sobre</a></li>
             <li><a class="menu" href="administrador">Página do Administrador</a></li>
-            
-            <li><a class="menu" href="logar">Login/Cadastro</a></li>
+            {% block login%}
+
+            {% endblock login%}
         </ul>
     </nav>
 

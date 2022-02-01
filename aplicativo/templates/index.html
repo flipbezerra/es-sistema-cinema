@@ -9,25 +9,42 @@
     {% endblock titulo %}
 
 </head>
-<body class="corpo">
+<header>
+
+    {% block login%}
+        <li><a class="menu" href="logar">Login/Cadastro</a></li>
+    {% endblock login%}
+
+</header>
+<body>
+
     {% block conteudo %}
-        <div class="row">
-            {% for filme in filmes %}
-            <div class="card-deck">
+        <div class="row align-items-center">
+        {% for filme in filmes %}
+            <div class="col-sm-3">
                 <div class="card">
-                    <img class="card-img-top" src="{{filme.capa.url}}" alt="Capa do filme">
+                    <img class="card-img-top" src="{{filme.capa.url}}">
                     <div class="card-body">
                         <h5 class="card-title">{{filme.nome}}</h5>
-                        <p class="card-text"> ({{filme.duracao}})<br> 
-                            Classificação: {{filme.classificacao}}<br>
-                            Sinopse: {{filme.sinopse}}
-                        </p>
+                        <p class="card-text">
+                            ({{filme.duracao}}) Classificação: {{filme.classificacao}}<br>
+                            Sinopse: {{filme.sinopse}}</p>
                         <a href="#" class="btn btn-primary">Assistir</a>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#target{{filme.nome}}">Trailer</button>
                     </div>
                 </div>
             </div>
-            {% endfor %}
+                    <div class="modal" id="target{{filme.nome}}">
+            <div class="modal_container">
+                <span id="close" class="op-x"></span>
+                <div class="iframe_container">
+                    <iframe width="727" height="409" src="https://www.youtube.com/embed/DbQFF57ho3g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>{{filme.trailer}}
+            </div>
+        {% endfor %}
         </div>
+            
+
     {% endblock conteudo %}
 
 </body>

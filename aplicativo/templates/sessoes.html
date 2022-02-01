@@ -9,12 +9,16 @@
     {% endblock titulo %}
 
 </head>
+<header>
+    {% block login%}
+        <li><a class="menu" href="deslogar">Sair</a></li>
+    {% endblock login%}
+</header>
 <body>
 
     {% block conteudo %}
         <div class="container">
             <h1> Criar Sessão </h1> <br><br>
-            {% bootstrap_messages %}
             <form method="post" action="{% url 'sessoes' %}" class="form" autocomplete="off" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% bootstrap_form form %}

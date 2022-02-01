@@ -3,16 +3,23 @@
 {% load bootstrap4 %}
 <html lang="pt-br">
 <head>
+
     {% block titulo %}
         <title>Home do Usuário - Cine Família</title>
     {% endblock titulo %}
+
 </head>
+<header>
+    {% block login%}
+        <li><a class="menu" href="filmes">Sair</a></li>
+    {% endblock login%}
+</header>
 <body>
 
     {% block conteudo %}
         <div class="row">
             {% for filme in filmes %}
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <div class="card">
                     <img class="card-img-top" src="{{filme.capa.url}}">
                     <div class="card-body">
@@ -20,23 +27,22 @@
                         <p class="card-text">
                             ({{filme.duracao}}) Classificação: {{filme.classificacao}}<br>
                             Sinopse: {{filme.sinopse}}</p>
-                        <a href="assento" class="btn btn-primary">Assistir</a>
+                        <a href="#" class="btn btn-primary">Assistir</a>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#target{{filme.nome}}">Trailer</button>
                     </div>
                 </div>
             </div>
-            {% endfor %}
-        </div>
-
-        <button id="play"><span class="op-play"></span></button>
-
-        <div class="modal">
+                    <div class="modal" id="target{{filme.nome}}">
             <div class="modal_container">
                 <span id="close" class="op-x"></span>
                 <div class="iframe_container">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/DbQFF57ho3g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                    <iframe width="727" height="409" src="https://www.youtube.com/embed/DbQFF57ho3g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>{{filme.trailer}}
             </div>
         </div>
+            {% endfor %}
+        </div>
+
     {% endblock conteudo %}
 
 </body>

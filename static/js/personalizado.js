@@ -18,9 +18,3 @@ Close.addEventListener('click',()=>{
     }
 });
 
-window.setTimeout(function() {
-    /* Instruções javascript - limite de tempo para os alertas serem exibidos */
-    $(".messages").fadeTo(400, 0).slideUp(400, function(){
-      $(this).remove();
-   });
-}, 3000);
