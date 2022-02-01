@@ -1,24 +1,28 @@
 # Projeto de Cinema Comunitário
 Projeto de Engenharia de Software I e II
 
-A instalação do Django e das libraries constando em requirements.txt são necessárias para o funcionamento
-da aplicação e podem ser instaladas com o comando "pip install -r requirements.txt"
+A instalação do Django e das libraries constando em requirements.txt são necessárias para o funcionamento da aplicação e podem ser instaladas com o comando "pip install -r requirements.txt"
 
-Conta de Administrador do Django:
-Usuário:admin
-Senha:12345678
+Usuário e senha dos usuários do sistema:
+Usuário Administrador: admin
+Senha: admin
 
-O sistema possui registros do tipo Usuário, Filme, Cartaz e Assento, cada um contendo um formulário
+Usuário comum: usuario
+Senha: senhadousuario
 
-A página de Usuário é gerenciada pelo Django-admin
 
-A página index é a página do usuário não autenticado, ele tem acesso apenas aos cartazes
 
-A página index_auth é a página do usuário/administrador
+O sistema possui registros do tipo Usuário, Filme, Cartaz e Assento, cada um contendo um formulário.
 
-Os formulários só podem acessados por administradores ou usuários autenticados
+A página de Usuário é gerenciada pelo Django-admin.
 
-Para ter uma lista de filmes, é necessário ter filmes, e para registrar filmes é necessário criar cartazes
+A página index é a página do usuário não autenticado, ele tem acesso apenas aos cartazes.
 
-É necessário criar assentos na página de administrador para o cliente poder escolher um
+A página index_auth é a página do usuário comum/administrador.
+
+Os formulários só podem acessados por administradores ou usuários autenticados.
+
+Para ter uma lista de filmes, é necessário ter filmes, e para registrar filmes é necessário criar cartazes.
+
+É necessário criar assentos na página de administrador para o cliente poder escolhe-lo.
 
